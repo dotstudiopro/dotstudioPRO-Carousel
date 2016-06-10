@@ -20,6 +20,8 @@ function ds_carousel_owl_carousel(){
 	wp_enqueue_style( 'owl-carousel-min', plugin_dir_url( __FILE__ ) . 'css/owl.carousel.min.css' );
 
 	wp_enqueue_style( 'owl-carousel-theme', plugin_dir_url( __FILE__ ) . 'css/owl.theme.default.min.css' );
+	wp_enqueue_style( 'ds-carousel-style', plugin_dir_url( __FILE__ ) . 'css/style.css' );
+	wp_enqueue_style( 'ds-font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css');
 
 }
 
@@ -63,9 +65,11 @@ function ds_carousel_html($objects = array(), $autoplay = true, $time_to_next_sl
 
 		$image = $imageexp[3];
 
-		$carousel .= "<div>";
+		$carousel .= "<div class='center-container'>";
 
-		$carousel .= "<a href='".home_url("channels/$o->slug")."'>";
+		$carousel .= "<a href='".home_url("channels/$o->slug")."' class='vert-center'>";
+
+		$carousel .= "<i class='fa fa-play-circle-o fa-3' aria-hidden='true'></i>";
 
 		$carousel .= "<img class='img-responsive' src='https://image.dotstudiopro.com/$image/1280/720' />";
 

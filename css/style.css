@@ -1,0 +1,18 @@
+.fa-play-circle-o {
+	position: absolute;
+	z-index: 1;
+	display: block;
+	color: white;
+	text-decoration: none;
+	opacity: 0.6;
+	font-size: 4em !important;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+}
+.vert-center{
+   position:relative;
+}
+.center-container {
+	position: relative;
+}
