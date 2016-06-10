@@ -10,9 +10,6 @@
 	left:50%;
 	transform:translate(-50%,-50%);
 }
-.vert-center{
-   position:relative;
-}
 .center-container {
 	position: relative;
 }
