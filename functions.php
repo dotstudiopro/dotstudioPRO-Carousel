@@ -31,7 +31,7 @@ function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $ite
 			
 			$('.owl-carousel').owlCarousel({
 			    items: <?php echo $items_to_display; ?>,
-   				nav:true,
+   				// nav:true,
 			    loop:true,
 			    margin:10,
 			    autoplay:<?php echo $autoplay ? 'true' : 'false'; ?>,
@@ -67,7 +67,7 @@ function ds_carousel_html($objects = array(), $autoplay = true, $time_to_next_sl
 
 		$carousel .= "<div><strong><small>$o->title</small></strong></div>";
 
-		$carousel .= "<div><small>".$description."</small></div>";
+		// $carousel .= "<div><small>".$description."</small></div>";
 
 		$carousel .= "</a>";
 

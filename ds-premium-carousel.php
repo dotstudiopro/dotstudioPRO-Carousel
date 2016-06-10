@@ -19,8 +19,6 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 
 add_action( 'wp_enqueue_scripts', 'ds_carousel_owl_carousel' );
 
-add_action( 'admin_enqueue_scripts', 'ds_carousel_owl_carousel' );
-
 function ds_carousel_main_check() {
 
     $plugins = get_option('active_plugins');
