@@ -9,12 +9,6 @@
 
 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
-if(!class_exists('DotStudioz_Commands')){
-
-	require_once("class.curl_commands.php");
-
-}
-
 require_once("functions.php");
 
 require 'updater/plugin-update-checker.php';
@@ -24,6 +18,8 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 );
 
 add_action( 'wp_enqueue_scripts', 'ds_carousel_owl_carousel' );
+
+add_action( 'admin_enqueue_scripts', 'ds_carousel_owl_carousel' );
 
 function ds_carousel_main_check() {
 
@@ -72,7 +68,7 @@ add_action("init", "ds_carousel_main_check");
 /** Add Menu Entry **/
 function dot_studioz_carousel_menu() {
 	
-	add_menu_page( 'dotstudioCarousel Options', 'dotstudioCarousel Options', 'manage_options', 'dot-studioz-carousel-options', 'dot_studioz_carousel_menu_page', 'dashicons-slides' );
+	add_menu_page( 'dotstudioCarousel Builder', 'dotstudioCarousel Builder', 'manage_options', 'dot-studioz-carousel-builder', 'dot_studioz_carousel_menu_page', 'dashicons-slides' );
 	
 }
 
