@@ -59,11 +59,15 @@ function ds_carousel_html($objects = array(), $autoplay = true, $time_to_next_sl
 
 		$description = strlen($o->description) > 150 ? substr($o->description, 0, 150)."..." : $o->description;
 
+		$imageexp = explode("/",$o->poster);
+
+		$image = $imageexp[3];
+
 		$carousel .= "<div>";
 
 		$carousel .= "<a href='".home_url("channels/$o->slug")."'>";
 
-		$carousel .= "<img class='img-responsive' src='$o->poster' />";
+		$carousel .= "<img class='img-responsive' src='https://image.dotstudiopro.com/$image/1280/720' />";
 
 		$carousel .= "<div><strong><small>$o->title</small></strong></div>";
 
