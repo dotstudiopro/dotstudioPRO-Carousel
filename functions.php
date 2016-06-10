@@ -5,7 +5,7 @@ function ds_carousel_check_main_plugin() {
     ?>
 
     <div class="update-nag">
-        <p>dotstudioPRO Premium Video plugin is either not installed or is inactive.  The dotstudioPRO Premium Carousel plugin has been deactivated.</p>
+        <p>dotstudioPRO Premium Video plugin is not installed, is inactive, or the version is too low for this add-on.  The dotstudioPRO Premium Carousel plugin has been deactivated.</p>
     </div>
 
     <?php

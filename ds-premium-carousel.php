@@ -31,6 +31,8 @@ function ds_carousel_main_check() {
 
     	if(strpos($v, "ds-premium-video")){
 
+    		$video_plugin = get_plugins( '/' . plugin_basename( dirname( $v ) ) ); //get_plugin_data( plugin_dir_url( $v )."ds-premium-video.php" );
+
     		$ds_premium_video = true;
 
     		break;
@@ -39,7 +41,7 @@ function ds_carousel_main_check() {
 
     }
 
-    if (!$ds_premium_video) {
+    if (!$ds_premium_video || isset($video_plugin) && $video_plugin["ds-premium-video.php"]['Version'] < 1.31 ) {
 
     	foreach($plugins as $k => $v){
 
