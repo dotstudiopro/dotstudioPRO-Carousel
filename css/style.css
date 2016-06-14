@@ -6,9 +6,14 @@
 	text-decoration: none;
 	opacity: 0.6;
 	font-size: 4em !important;
-	top:50%;
+	top:44%;
 	left:50%;
 	transform:translate(-50%,-50%);
+}
+@media (max-width: 640px) {
+	.fa-play-circle-o {
+		font-size: 2.5em !important;
+	}
 }
 .center-container {
 	position: relative;

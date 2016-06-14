@@ -81,9 +81,13 @@ function ds_carousel_html($objects = array(), $autoplay = true, $time_to_next_sl
 
 		$carousel .= "<a href='".home_url("channels/$o->slug")."' class='vert-center'>";
 
+		$carousel .= "<div>";
+
 		$carousel .= "<i class='fa fa-play-circle-o fa-3' aria-hidden='true'></i>";
 
 		$carousel .= "<img class='' src='https://image.dotstudiopro.com/$image/1280/720' />";
+
+		$carousel .= "</div>";
 
 		$carousel .= "<div><strong><small>$o->title</small></strong></div>";
 
