@@ -71,7 +71,7 @@ function ds_carousel_html($objects = array(), $autoplay = true, $time_to_next_sl
 
 		$description = strlen($o->description) > 150 ? substr($o->description, 0, 150)."..." : $o->description;
 
-		$title = strlen($o->title) > 50 ? substr($o->title, 0, 50)."..." : $o->title;
+		$title = strlen($o->title) > 20 ? substr($o->title, 0, 20)."..." : $o->title;
 
 		$imageexp = explode("/",$o->poster);
 
