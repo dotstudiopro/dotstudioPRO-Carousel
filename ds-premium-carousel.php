@@ -6,7 +6,7 @@
 ** Author: dotstudioPRO
 ** Author URI: #
 */
-
+ 
 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 require_once("functions.php");
