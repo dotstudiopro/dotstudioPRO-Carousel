@@ -30,12 +30,17 @@ function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $ite
 	?>
 	<script>
 		jQuery(function($){
+
+			$('body').css('overflow-x', 'hidden');
+
+			$('.owl-carousel').css("width", $('.owl-carousel').parent().width());
 			
 			$('.owl-carousel').owlCarousel({
 			    items: <?php echo $items_to_display; ?>,
    				// nav:true,
 			    loop:true,
 			    margin:10,
+			    center:true,
 			    autoplay:<?php echo $autoplay ? 'true' : 'false'; ?>,
 			    autoplayTimeout:<?php echo $time_to_next_slide; ?>000,
 			    autoplayHoverPause:true
@@ -71,7 +76,7 @@ function ds_carousel_html($objects = array(), $autoplay = true, $time_to_next_sl
 
 		$carousel .= "<i class='fa fa-play-circle-o fa-3' aria-hidden='true'></i>";
 
-		$carousel .= "<img class='img-responsive' src='https://image.dotstudiopro.com/$image/1280/720' />";
+		$carousel .= "<img class='' src='https://image.dotstudiopro.com/$image/1280/720' />";
 
 		$carousel .= "<div><strong><small>$o->title</small></strong></div>";
 
