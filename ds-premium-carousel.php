@@ -22,7 +22,7 @@ add_action( 'wp_enqueue_scripts', 'ds_carousel_owl_carousel' );
 function ds_carousel_main_check() {
 
     $plugins = get_option('active_plugins');
-
+ 
     $ds_premium_video = false;
 
     foreach($plugins as $k => $v){
