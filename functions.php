@@ -34,6 +34,11 @@ function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $ite
 			$('body').css('overflow-x', 'hidden');
 
 			$('.owl-carousel').css("width", $('.owl-carousel').parent().width());
+
+			$(window).resize(function(){
+
+				$('.owl-carousel').css("width", $('.owl-carousel').parent().width());
+			});
 			
 			$('.owl-carousel').owlCarousel({
 			    items: <?php echo $items_to_display; ?>,
@@ -65,6 +70,8 @@ function ds_carousel_html($objects = array(), $autoplay = true, $time_to_next_sl
 	foreach($objects as $o){
 
 		$description = strlen($o->description) > 150 ? substr($o->description, 0, 150)."..." : $o->description;
+
+		$title = strlen($o->title) > 50 ? substr($o->title, 0, 50)."..." : $o->title;
 
 		$imageexp = explode("/",$o->poster);
 

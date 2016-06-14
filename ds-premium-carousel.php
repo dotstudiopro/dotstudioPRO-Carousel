@@ -2,7 +2,7 @@
 
 /* 
 ** Plugin Name: dotstudioPRO Premium Carousel
-** Version: 1.01
+** Version: 1.02
 ** Author: dotstudioPRO
 ** Author URI: #
 */
