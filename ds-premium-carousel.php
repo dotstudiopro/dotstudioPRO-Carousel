@@ -16,7 +16,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
     'http://wordpress.dotstudiopro.com/pluginupdates/carousel/api/update.php',
     __FILE__
 );
-
+ 
 add_action( 'wp_enqueue_scripts', 'ds_carousel_owl_carousel' );
 
 function ds_carousel_main_check() {
