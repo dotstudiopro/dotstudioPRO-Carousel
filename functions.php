@@ -39,6 +39,8 @@ function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $ite
 
 				$('.owl-carousel').css("width", $('.owl-carousel').parent().width());
 			});
+
+			var owl = $('.owl-carousel');
 			
 			$('.owl-carousel').owlCarousel({
 			    items: <?php echo $items_to_display; ?>,
@@ -48,7 +50,7 @@ function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $ite
 			    center:true,
 			    autoplay:<?php echo $autoplay ? 'true' : 'false'; ?>,
 			    autoplayTimeout:<?php echo $time_to_next_slide; ?>000,
-			    autoplayHoverPause:true
+			    // autoplayHoverPause:true
 			});
 
 			$('.owl-carousel').mouseleave(function(){
@@ -56,6 +58,10 @@ function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $ite
 				$('.owl-carousel').trigger('play.owl.autoplay',[<?php echo $time_to_next_slide; ?>000]);
 
 			});
+
+			$('.owl-carousel').mouseenter(function(){
+			    owl.trigger('stop.owl.autoplay')
+			})
 
 		});
 	</script>
