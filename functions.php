@@ -26,7 +26,7 @@ function ds_carousel_owl_carousel(){
 }
 
 function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $items_to_display = 3){
-
+ 
 	?>
 	<script>
 		jQuery(function($){
