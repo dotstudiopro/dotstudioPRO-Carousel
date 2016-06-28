@@ -1,4 +1,4 @@
-.fa-play-circle-o {
+.owl-item > .center-container > a > div > .fa-play-circle-o {
 	position: absolute;
 	z-index: 1;
 	display: block;
@@ -11,7 +11,7 @@
 	transform:translate(-50%,-50%);
 }
 @media (max-width: 640px) {
-	.fa-play-circle-o {
+	.gridder-og-play > .fa-play-circle-o {
 		font-size: 2.5em !important;
 	}
 }
