@@ -28,21 +28,19 @@ function ds_carousel_owl_carousel(){
 function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $items_to_display = 3){
  
 	?>
-	<script>
+	<script type="text/javascript">
 		jQuery(function($){
-
 			$('body').css('overflow-x', 'hidden');
-
-			$('.owl-carousel').css("width", $('.owl-carousel').parent().width());
-
-			$(window).resize(function(){
-
-				$('.owl-carousel').css("width", $('.owl-carousel').parent().width());
-			});
-
 			var owl = $('.owl-carousel');
 			
-			$('.owl-carousel').owlCarousel({
+			resizeCarousel();
+
+			$(window).resize(function(){
+				resizeCarousel();
+			});
+
+			
+			owl.owlCarousel({
 			    items: <?php echo $items_to_display; ?>,
    				// nav:true,
 			    loop:true,
@@ -53,15 +51,18 @@ function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $ite
 			    // autoplayHoverPause:true
 			});
 
-			$('.owl-carousel').mouseleave(function(){
-
-				$('.owl-carousel').trigger('play.owl.autoplay',[<?php echo $time_to_next_slide; ?>000]);
-
+			owl.mouseleave(function(){
+				$(this).trigger('play.owl.autoplay',[<?php echo $time_to_next_slide; ?>000]);
 			});
 
-			$('.owl-carousel').mouseenter(function(){
-			    owl.trigger('stop.owl.autoplay')
-			})
+			owl.mouseenter(function(){
+			    $(this).trigger('stop.owl.autoplay');
+			});
+
+			function resizeCarousel() {
+				var w = $(window).width();
+				owl.width(w + 'px');
+			}
 
 		});
 	</script>
