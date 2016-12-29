@@ -61,7 +61,9 @@ function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $ite
 
 			function resizeCarousel() {
 				var w = $(window).width();
-				owl.width(w + 'px');
+				var ocw = $('#owl-carosel-width').width();
+				var ocwWidth = w >=ocw ? ocw : w;
+				owl.width(ocwWidth);
 			}
 
 		});
@@ -72,7 +74,7 @@ function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $ite
 
 function ds_carousel_html($objects = array(), $autoplay = true, $time_to_next_slide = 3, $items_to_display = 3){
 
-	$carousel = "<div class='owl-carousel owl-theme'>";
+	$carousel = "<div id='owl-carosel-width' style='width:99%;position:relative;'></div><div class='owl-carousel owl-theme'>";
 
 	foreach($objects as $o){
 
