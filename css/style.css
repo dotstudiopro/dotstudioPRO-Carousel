@@ -18,3 +18,7 @@
 .center-container {
 	position: relative;
 }
+
+.owl-carousel {
+	margin: 0 auto;
+}
