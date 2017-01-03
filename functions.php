@@ -1,11 +1,11 @@
 <?php 
 
-function ds_carousel_check_main_plugin() {
+function ds_owl_carousel_check_main_plugin() {
 	
     ?>
 
     <div class="update-nag">
-        <p>dotstudioPRO Premium Video plugin is not installed, is inactive, or the version is too low for this add-on.  The dotstudioPRO Premium Carousel plugin has been deactivated.</p>
+        <p>dotstudioPRO Premium Video plugin is not installed, is inactive, or the version is too low for this add-on.  The dotstudioPRO Premium Owl Carousel plugin has been deactivated.</p>
     </div>
 
     <?php
@@ -13,25 +13,23 @@ function ds_carousel_check_main_plugin() {
 }
 
 
-function ds_carousel_owl_carousel(){
+function ds_owl_carousel(){
 	
 	wp_enqueue_script( 'owl-carousel', plugin_dir_url( __FILE__ ) . 'js/owl.carousel.min.js', array('jquery') );
-
 	wp_enqueue_style( 'owl-carousel-min', plugin_dir_url( __FILE__ ) . 'css/owl.carousel.min.css' );
-
 	wp_enqueue_style( 'owl-carousel-theme', plugin_dir_url( __FILE__ ) . 'css/owl.theme.default.min.css' );
 	wp_enqueue_style( 'ds-carousel-style', plugin_dir_url( __FILE__ ) . 'css/style.css' );
 	wp_enqueue_style( 'ds-font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css');
 
 }
 
-function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $items_to_display = 3){
+function ds_owl_carousel_instantiate(){
  
 	?>
 	<script type="text/javascript">
 		jQuery(function($){
 			$('body').css('overflow-x', 'hidden');
-			var owl = $('.owl-carousel');
+			var owls = $('.owl-carousel');
 			
 			resizeCarousel();
 
@@ -39,31 +37,44 @@ function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $ite
 				resizeCarousel();
 			});
 
-			
-			owl.owlCarousel({
-			    items: <?php echo $items_to_display; ?>,
-   				// nav:true,
-			    loop:true,
-			    margin:10,
-			    center:true,
-			    autoplay:<?php echo $autoplay ? 'true' : 'false'; ?>,
-			    autoplayTimeout:<?php echo $time_to_next_slide; ?>000,
-			    // autoplayHoverPause:true
-			});
+			$.each(owls,function(key,val){
+				var autoplay = $(this).attr('data-autoplay');
+				var slidetime = parseInt($(this).attr('data-slidetime')) * 1000;
+				var itemCount = $(this).attr('data-itemcount');
 
-			owl.mouseleave(function(){
-				$(this).trigger('play.owl.autoplay',[<?php echo $time_to_next_slide; ?>000]);
-			});
+				$(this).owlCarousel({
+				    items: itemCount,
+	   				// nav:true,
+				    loop:true,
+				    margin:10,
+				    center:true,
+				    autoplay: autoplay,
+				    autoplayTimeout: slidetime,
+				});
 
-			owl.mouseenter(function(){
-			    $(this).trigger('stop.owl.autoplay');
+				$(this).mouseleave(function(){
+					$(this).trigger('play.owl.autoplay',[<?php echo $time_to_next_slide; ?>000]);
+				});
+
+				$(this).mouseenter(function(){
+				    $(this).trigger('stop.owl.autoplay');
+				});
+
+
 			});
 
 			function resizeCarousel() {
 				var w = $(window).width();
-				var ocw = $('#owl-carosel-width').width();
-				var ocwWidth = w >=ocw ? ocw : w;
-				owl.width(ocwWidth);
+
+				$.each(owls,function(key,val) {
+					var which = $(this).attr('id').replace('owl-carousel-','');
+
+					var ocw = $('#owl-carosel-width-' + which).width();
+					var ocwWidth = w >=ocw ? ocw : w;
+					$(this).width(ocwWidth);
+
+				});
+
 			}
 
 		});
@@ -72,124 +83,81 @@ function ds_carousel_instantiate($autoplay = true, $time_to_next_slide = 3, $ite
 
 }
 
-function ds_carousel_html($objects = array(), $autoplay = true, $time_to_next_slide = 3, $items_to_display = 3){
+function ds_owl_carousel_html($channel_slug = '', $autoplay = true, $time_to_next_slide = 3, $items_to_display = 3){
 
-	$carousel = "<div id='owl-carosel-width' style='width:99%;position:relative;'></div><div class='owl-carousel owl-theme'>";
+	$category = get_page_by_path( '/channel-categories/' . $channel_slug, OBJECT );
+	$title = $category->post_title;
 
-	foreach($objects as $o){
+	$rndId = ds_owl_carousel_rnd_id(5);
+	$auto = $autoplay ? 'true' : 'false'; 
+	$carousel =  "<div id='owl-carosel-width-$rndId' class='owl-carousel-width'></div>";
+	$carousel .= "<div class='owl-carousel-title' style='position:relative;'><h2>$title</h2><a class='owl-carousel-ellipsis' href='/channel-categories/$channel_slug/' title='More...'>...</a></div>";
+	$carousel .= "<div class='owl-carousel owl-theme' id='owl-carousel-$rndId'  data-autoplay='$auto' data-slidetime='$time_to_next_slide' data-itemcount='$items_to_display'>";
+	
+	$channels = grab_category($channel_slug);
+	$title = $channels->title;
 
-		$description = strlen($o->description) > 150 ? substr($o->description, 0, 150)."..." : $o->description;
 
-		$title = strlen($o->title) > 20 ? substr($o->title, 0, 20)."..." : $o->title;
+	if($channels && is_array($channels)){
 
-		$imageexp = explode("/",$o->poster);
+		foreach($channels as $ch) {
+				// iterate thru the channel, get the applicable thumbnails, create the HTML output
 
-		$image = $imageexp[3];
 
-		$carousel .= "<div class='center-container'>";
+				$id =  $ch->_id;
+				$thumb_id = isset( $ch->videos_thumb ) ?  $ch->videos_thumb : '';
+				$slug =  $ch->slug;
+				$spotlight_poster = isset( $ch->spotlight_poster ) ?  $ch->spotlight_poster : '';
 
-		$carousel .= "<a href='".home_url("channels/$o->slug")."' class='vert-center'>";
-
-		$carousel .= "<div>";
-
-		$carousel .= "<i class='fa fa-play-circle-o fa-3' aria-hidden='true'></i>";
-
-		$carousel .= "<img class='' src='https://image.dotstudiopro.com/$image/1280/720' />";
-
-		$carousel .= "</div>";
-
-		$carousel .= "<div><strong><small>$o->title</small></strong></div>";
-
-		// $carousel .= "<div><small>".$description."</small></div>";
-
-		$carousel .= "</a>";
-
-		$carousel .= "</div>";
-
+				$carousel .= "<div class='center-container'>";
+				$carousel .= "<a href='".home_url("channels/$slug")."' class='vert-center'>";
+				$carousel .= "<div>";
+				$carousel .= "<img class='' src='$spotlight_poster/1280/720' />";
+				$carousel .= "</div>";
+				$carousel .= "</a>";
+				$carousel .= "</div>";				
+		}
 	}
+
 
 	$carousel .= "</div>";
 
-	ds_carousel_instantiate($autoplay, $time_to_next_slide, $items_to_display);
+	ds_owl_carousel_instantiate();
 
 	return $carousel;
 
 }
 
-function ds_carousel_build_objects($ids = array()){
 
-	$objs = array();
-
-	foreach($ids as $id){
-
-		$obj = grab_channel_by_id($id);
-
-		$objs[] = $obj[0];
-
-	}
-
-	return $objs;
-
+function ds_owl_carousel_rnd_id($length = 10)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
 }
 
-function ds_carousel_display_shortcode( $atts ) {
+
+function ds_owl_carousel_display_shortcode( $atts ) {
 
 	$atts = shortcode_atts( array(
 
-		'channels' => '',
+		'channel' => '',
 		'autoplay' => true,
 		'time_to_next_slide' => 3,
 		'items_to_display' => 3
 
-	), $atts, 'ds_carousel_display' );
+	), $atts, 'ds_owl_carousel' );
 
-	if(!count($atts['channels']))
+
+	if(!count($atts['channel']))
 		return;
 
-	if(strpos($atts['channels'], ',') !== false){
-
-		$channels = explode( ',', $atts['channels'] );
-
-	} else {
-
-		$channels = array($atts['channels']);
-
-	}
-
-	$objs = ds_carousel_build_objects( $channels );
-
-	return ds_carousel_html( $objs, $atts['autoplay'], $atts['time_to_next_slide'], $atts['items_to_display'] );
+	return ds_owl_carousel_html( $atts['channel'], $atts['autoplay'], $atts['time_to_next_slide'], $atts['items_to_display'] );
 
 }
-add_shortcode( 'ds_carousel_display', 'ds_carousel_display_shortcode' );
+add_shortcode( 'ds_owl_carousel', 'ds_owl_carousel_display_shortcode' );
 
-
-function grab_channel_by_id($id){
-	
-	global $ds_curl;
-	
-	$channel = $ds_curl->curl_command( 'single-channel-by-id', array( 'channel_slug' => str_replace( " ", "", $id ) ) );
-	
-	return $channel;
-	
-}
-
-function ds_carousel_local_channels_list(){
-
-	global $wpdb;
-
-	$channel_parent = get_page_by_path("channels");
-
-	$channels = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."posts WHERE post_parent = ".$channel_parent->ID." ORDER BY post_name ASC");
-
-	$channels_list = "";
-
-	foreach($channels as $ch){
-
-		$channels_list .= "<input type='checkbox' name='channel' value='$ch->post_name'> $ch->post_title<br/>";
-
-	}
-
-	return $channels_list;
-
-}

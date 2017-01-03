@@ -71,7 +71,7 @@
 
 		}
 
-		document.getElementById('ds-carousel-built-shortcode').innerHTML = "[ds_carousel_display channels='"+vals+"' time_to_next_slide='"+document.getElementsByName('ttns')[0].value+"' items_to_display='"+document.getElementsByName('displayed')[0].value+"']"
+		document.getElementById('ds-carousel-built-shortcode').innerHTML = "[ds_owl_carousel channel='"+vals+"' time_to_next_slide='"+document.getElementsByName('ttns')[0].value+"' items_to_display='"+document.getElementsByName('displayed')[0].value+"']"
 	}
 
 
