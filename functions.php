@@ -23,76 +23,27 @@ function ds_owl_carousel(){
 
 }
 
-function ds_owl_carousel_instantiate(){
- 
-	?>
-	<script type="text/javascript">
-		jQuery(function($){
-			$('body').css('overflow-x', 'hidden');
-			var owls = $('.owl-carousel');
-			
-			resizeCarousel();
+function ds_owl_carousel_html($args){
 
-			$(window).resize(function(){
-				resizeCarousel();
-			});
-
-			$.each(owls,function(key,val){
-				var autoplay = $(this).attr('data-autoplay');
-				var slidetime = parseInt($(this).attr('data-slidetime')) * 1000;
-				var itemCount = $(this).attr('data-itemcount');
-
-				$(this).owlCarousel({
-				    items: itemCount,
-	   				// nav:true,
-				    loop:true,
-				    margin:10,
-				    center:true,
-				    autoplay: autoplay,
-				    autoplayTimeout: slidetime,
-				});
-
-				$(this).mouseleave(function(){
-					$(this).trigger('play.owl.autoplay',[<?php echo $time_to_next_slide; ?>000]);
-				});
-
-				$(this).mouseenter(function(){
-				    $(this).trigger('stop.owl.autoplay');
-				});
+	$opts = implode(', ', array_map(
+    function ($v, $k) { return sprintf("%s=%s", $k, $v); },
+    $args,
+    array_keys($args)
+));
 
 
-			});
-
-			function resizeCarousel() {
-				var w = $(window).width();
-
-				$.each(owls,function(key,val) {
-					var which = $(this).attr('id').replace('owl-carousel-','');
-
-					var ocw = $('#owl-carosel-width-' + which).width();
-					var ocwWidth = w >=ocw ? ocw : w;
-					$(this).width(ocwWidth);
-
-				});
-
-			}
-
-		});
-	</script>
-	<?php 
-
-}
-
-function ds_owl_carousel_html($channel_slug = '', $autoplay = true, $time_to_next_slide = 3, $items_to_display = 3){
+  $channel_slug = $args['channel'];
+  $time_to_next_slide = $args['time_to_next_slide'];
+	$autoplay = $args['autoplay'] ? 'true' : 'false'; 
+  $items_to_display = $args['items_to_display'];
 
 	$category = get_page_by_path( '/channel-categories/' . $channel_slug, OBJECT );
 	$title = $category->post_title;
 
 	$rndId = ds_owl_carousel_rnd_id(5);
-	$auto = $autoplay ? 'true' : 'false'; 
 	$carousel =  "<div id='owl-carosel-width-$rndId' class='owl-carousel-width'></div>";
 	$carousel .= "<div class='owl-carousel-title' style='position:relative;'><h2>$title</h2><a class='owl-carousel-ellipsis' href='/channel-categories/$channel_slug/' title='More...'>...</a></div>";
-	$carousel .= "<div class='owl-carousel owl-theme' id='owl-carousel-$rndId'  data-autoplay='$auto' data-slidetime='$time_to_next_slide' data-itemcount='$items_to_display'>";
+	$carousel .= "<div class='owl-carousel owl-theme' id='owl-carousel-$rndId' data-options='$opts'>";
 	
 	$channels = grab_category($channel_slug);
 	$title = $channels->title;
@@ -121,8 +72,6 @@ function ds_owl_carousel_html($channel_slug = '', $autoplay = true, $time_to_nex
 
 
 	$carousel .= "</div>";
-
-	ds_owl_carousel_instantiate();
 
 	return $carousel;
 
@@ -156,7 +105,7 @@ function ds_owl_carousel_display_shortcode( $atts ) {
 	if(!count($atts['channel']))
 		return;
 
-	return ds_owl_carousel_html( $atts['channel'], $atts['autoplay'], $atts['time_to_next_slide'], $atts['items_to_display'] );
+	return ds_owl_carousel_html($atts);
 
 }
 add_shortcode( 'ds_owl_carousel', 'ds_owl_carousel_display_shortcode' );
