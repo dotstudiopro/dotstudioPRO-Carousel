@@ -1,0 +1,29 @@
+table.ds-carousel-admin > tbody > tr > td:first-child {
+	text-align:right;
+	width:250px;
+	vertical-align:top;
+}
+table.ds-carousel-admin > tbody > tr > td:nth-child(2) {
+	width:300px;
+	vertical-align:top;
+}
+table.ds-carousel-admin > tbody > tr > td[colspan="2"] {
+	text-align:left;
+}
+table.carousel-opts > tbody > tr > td {
+	padding:2px;
+}
+#carousel-type {
+	width:100%;
+}
+select.opts-select {
+	width:100px;
+}
+.carousel-list {
+	width:300px;
+	height:200px;
+	overflow-y:scroll;
+	font-size:14px;
+}
+label {
+}

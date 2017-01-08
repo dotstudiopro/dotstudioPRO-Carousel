@@ -65,3 +65,26 @@ function owl_carousel_main_check() {
 register_activation_hook( __FILE__, 'owl_carousel_main_check' );
 
 add_action("init", "owl_carousel_main_check");
+
+
+/** Add Menu Entry **/
+function ds_owl_carousel_menu() {
+    
+    add_menu_page( 'DS Carousel Shortcode', 'DS Carousel Shortcode', 'manage_options', 'ds-owl-carousel-shortcode', 'ds_owl_carousel_menu_page', 'dashicons-slides' );
+    
+}
+
+add_action( 'admin_menu', 'ds_owl_carousel_menu' );
+
+// Set up the page for the plugin
+function ds_owl_carousel_menu_page() {
+    if ( !current_user_can( 'manage_options' ) )  {
+        wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+    }
+    
+    echo "<div class='wrap'>";
+    include("menu.tpl.php");    
+    echo "</div>";
+    
+}
+/** End Menu Entry **/
