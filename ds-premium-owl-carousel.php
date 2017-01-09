@@ -69,6 +69,8 @@ add_action("init", "owl_carousel_main_check");
 
 /** Add Menu Entry **/
 function ds_owl_carousel_menu() {
+    wp_enqueue_style( 'ds-admin-css', plugin_dir_url( __FILE__ ) . 'css/owl.carousel.admin.min.css' );
+    wp_enqueue_script( 'ds-admin-js', plugin_dir_url( __FILE__ ) . 'js/owl.carousel.admin.min.js' );
     
     add_menu_page( 'DS Carousel Shortcode', 'DS Carousel Shortcode', 'manage_options', 'ds-owl-carousel-shortcode', 'ds_owl_carousel_menu_page', 'dashicons-slides' );
     

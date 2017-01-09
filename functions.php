@@ -63,12 +63,12 @@ function ds_owl_category_html($args) {
 			$slug =  $ch->slug;
 			$spotlight_poster = isset( $ch->spotlight_poster ) ?  $ch->spotlight_poster : '';
 
-			$carousel .= "<div class='center-container'>";
-			$carousel .= "<a href='".home_url("channels/$slug")."' class='vert-center'>";
-			$carousel .= "<div>";
-			$carousel .= "<img class='' src='$spotlight_poster/1280/720' />";
-			$carousel .= "</div>";
-			$carousel .= "</a>";
+			$carousel .= "<div class='center-container item'>";
+			$carousel .= "	<a href='".home_url("channels/$slug")."' class='vert-center'>";
+			$carousel .= "		<div>";
+			$carousel .= "			<img class='' src='$spotlight_poster/1280/720' />";
+			$carousel .= "		</div>";
+			$carousel .= "	</a>";
 			$carousel .= "</div>";				
 		}
 	}
@@ -99,14 +99,14 @@ function ds_owl_channel_html($args) {
 		$title = strlen($o->title) > 20 ? substr($o->title, 0, 20)."..." : $o->title;
 		$imageexp = explode("/",$o->poster);
 		$image = $imageexp[3];
-		$carousel .= "<div class='center-container'>";
-		$carousel .= "<a href='".home_url("channels/$o->slug")."' class='vert-center'>";
-		$carousel .= "<div>";
-		$carousel .= "<i class='fa fa-play-circle-o fa-3' aria-hidden='true'></i>";
-		$carousel .= "<img class='' src='https://image.dotstudiopro.com/$image/1280/720' />";
-		$carousel .= "</div>";
-		$carousel .= "<div><strong><small class='owl-carousel-subtitle'>$o->title</small></strong></div>";
-		$carousel .= "</a>";
+		$carousel .= "<div class='center-container item'>";
+		$carousel .= "	<a href='".home_url("channels/$o->slug")."' class='vert-center'>";
+		$carousel .= "		<div>";
+		$carousel .= "			<i class='fa fa-play-circle-o fa-3' aria-hidden='true'></i>";
+		$carousel .= "			<img class='' src='https://image.dotstudiopro.com/$image/1280/720' />";
+		$carousel .= "		</div>";
+		$carousel .= "		<div><strong><small class='owl-carousel-subtitle'>$o->title</small></strong></div>";
+		$carousel .= "	</a>";
 		$carousel .= "</div>";
 
 	}
