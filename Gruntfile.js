@@ -36,6 +36,8 @@ module.exports = function(grunt) {
 										'js/owl.carousel.admin.min.js': ['src/js/owl.carousel.admin.js']
 								}, {
 										'js/owl.carousel.min.js': ['src/js/owl.carousel.js']
+								}, {
+										'js/owl.carousel.custom.min.js': ['src/js/owl.carousel.custom.js']
 								}, ]
 						}
 				}

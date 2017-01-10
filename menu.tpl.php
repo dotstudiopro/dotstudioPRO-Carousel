@@ -68,7 +68,7 @@
 												for($i = 1; $i <= 10; $i++) {
 													$s = $i != 1 ? 's':'';
 													$sel = $i == 3 ? " selected" : "";
-													echo '<option value="' . $i .'"'. $sel .'>' . $i . ' second'.$s.'</option>';
+													echo '<option value="' . $i*1000 .'"'. $sel .'>' . $i . ' second'.$s.'</option>';
 												}
 												?>
 												</select>
@@ -87,6 +87,20 @@
 												</select>
 										</td>
 								</tr>
+									<tr>
+										<td>Autoplay Speed:</td>
+										<td><select id="opts-autoplaySpeed" class="opts-select opt-change">
+												<?php 
+												for($i = 1; $i <= 10; $i++) {
+													$s = $i != 1 ? 's':'';
+													$sel = $i == 3 ? " selected" : "";
+													echo '<option value="' . $i*1000 . '"'. $sel .'>' . $i . ' second'.$s.'</option>';
+												}
+												?>
+												</select>
+										</td>
+								</tr>
+
 								<tr>
 										<td>Slides per Transition:</td>
 										<td><select id="opts-slide-by" class="opts-select opt-change">
@@ -98,7 +112,7 @@
 												?>
 												</select>
 										</td>
-									</tr>
+								</tr>
 								<tr>
 										<td>Autoplay:</td>
 										<td><input type="checkbox" id="opts-autoplay" checked class="opt-change"></td>
@@ -106,6 +120,18 @@
 								<tr>
 										<td>Pause On Hover:</td>
 										<td><input type="checkbox" id="opts-autoplayHoverPause" checked class="opt-change"></td>
+								</tr>
+								<tr>
+										<td>Navigation Dots:</td>
+										<td><input type="checkbox" id="opts-dots" class="opt-change"></td>
+								</tr>
+								<tr>
+									  <td>Animation In:</td>
+									  <td><?php echo ds_owl_admin_animation_select('opts-animate-in','animate-type opt-change'); ?></td>
+								</tr>
+								<tr>
+									  <td>Animation Out:</td>
+									  <td><?php echo ds_owl_admin_animation_select('opts-animate-out','animate-type opt-change'); ?></td>
 								</tr>
 								</table>
 						</td>

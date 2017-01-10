@@ -12,13 +12,25 @@ function ds_owl_carousel_check_main_plugin() {
 
 }
 
+function ds_owl_admin_animation_select($name,$className='') {
+	$aryAnimations = ['bounce','flash','pulse','rubberBand','shake','swing','tada','wobble','jello','bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp','bounceOut','bounceOutDown','bounceOutLeft','bounceOutRight','bounceOutUp','fadeIn','fadeInDown','fadeInDownBig','fadeInLeft','fadeInLeftBig','fadeInRight','fadeInRightBig','fadeInUp','fadeInUpBig','fadeOut','fadeOutDown','fadeOutDownBig','fadeOutLeft','fadeOutLeftBig','fadeOutRight','fadeOutRightBig','fadeOutUp','fadeOutUpBig','flipInX','flipInY','flipOutX','flipOutY','lightSpeedIn','lightSpeedOut','rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight','rotateOut','rotateOutDownLeft','rotateOutDownRight','rotateOutUpLeft','rotateOutUpRight','hinge','rollIn','rollOut','zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp','zoomOut','zoomOutDown','zoomOutLeft','zoomOutRight','zoomOutUp','slideInDown','slideInLeft','slideInRight','slideInUp','slideOutDown','slideOutLeft','slideOutRight','slideOutUp'];
+	$strOut = '<select name='.$name.' id='.$name.' class="'.$className.'" disabled=disabled>';
+	$strOut .= '<option value="">-- None --</option>';
+	for($i = 0; $i <= count($aryAnimations)-1; $i++) {
+		$strOut .= '<option value='.$aryAnimations[$i].'>'.$aryAnimations[$i].'</option>';
+	}
+	$strOut .= '<select>';
+	return $strOut;
+
+}
+
+
 
 function ds_owl_carousel(){
 	
 	wp_enqueue_script( 'owl-carousel', plugin_dir_url( __FILE__ ) . 'js/owl.carousel.min.js', array('jquery') );
+	wp_enqueue_script( 'owl-carousel-custom', plugin_dir_url( __FILE__ ) . 'js/owl.carousel.custom.min.js' );
 	wp_enqueue_style( 'owl-carousel-min', plugin_dir_url( __FILE__ ) . 'css/owl.carousel.min.css' );
-	wp_enqueue_style( 'owl-carousel-theme', plugin_dir_url( __FILE__ ) . 'css/owl.theme.default.min.css' );
-	wp_enqueue_style( 'ds-carousel-style', plugin_dir_url( __FILE__ ) . 'css/style.css' );
 	wp_enqueue_style( 'ds-font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css');
 
 }
@@ -166,26 +178,27 @@ function ds_owl_grab_channel_by_id($id) {
 
 function ds_owl_carousel_display_shortcode( $atts ) {
 
+
 	$args = shortcode_atts( array(
 
 		'channels' => '',
 		'category' => '',
 		'title' => '',
 		'autoplay' => true,
-		'autoplay_timeout' => 3,
+		'dots' => false,
+		'autoplay_timeout' => 3000,
+		'autoplay_speed' => 3000,
 		'autoplay_hover_pause' => true,
 		'items' => 3,
+		'slide_by' => 3,
+		'animate_out' => '',
+		'animate_in' => '',
+		'dots' => false,
 
 	), $atts, 'ds_owl_carousel' );
 
-
 	if(!count($args['channels'])  || !count($args['category']))
 		return;
-
-	if(count($atts['slide_by'])) {
-		$args['slide_by'] = $atts['slide_by'];
-	}
-
 
 	return ds_owl_carousel_html($args);
 
