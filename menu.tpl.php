@@ -87,6 +87,7 @@
 												</select>
 										</td>
 								</tr>
+								<!--
 									<tr>
 										<td>Autoplay Speed:</td>
 										<td><select id="opts-autoplaySpeed" class="opts-select opt-change">
@@ -97,6 +98,15 @@
 													echo '<option value="' . $i*1000 . '"'. $sel .'>' . $i . ' second'.$s.'</option>';
 												}
 												?>
+												</select>
+										</td>
+								</tr>
+								-->
+									<tr>
+										<td>Autoplay Direction:</td>
+										<td><select id="opts-rtl" class="opts-select opt-change">
+												<option value="0">Left To Right</option>
+												<option value="1">Right To Left</option>
 												</select>
 										</td>
 								</tr>
@@ -124,6 +134,10 @@
 								<tr>
 										<td>Navigation Dots:</td>
 										<td><input type="checkbox" id="opts-dots" class="opt-change"></td>
+								</tr>
+								<tr>
+										<td>Navigation Buttons:</td>
+										<td><input type="checkbox" id="opts-nav" class="opt-change"></td>
 								</tr>
 								<tr>
 									  <td>Animation In:</td>

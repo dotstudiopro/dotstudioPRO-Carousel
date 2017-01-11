@@ -187,13 +187,14 @@ function ds_owl_carousel_display_shortcode( $atts ) {
 		'autoplay' => true,
 		'dots' => false,
 		'autoplay_timeout' => 3000,
-		'autoplay_speed' => 3000,
 		'autoplay_hover_pause' => true,
 		'items' => 3,
-		'slide_by' => 3,
+		'slide_by' => 1,
 		'animate_out' => '',
 		'animate_in' => '',
 		'dots' => false,
+		'rtl' => false,
+		'nav' => false,
 
 	), $atts, 'ds_owl_carousel' );
 
