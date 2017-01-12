@@ -25,8 +25,6 @@ module.exports = function(grunt) {
 						dist: {
 								files: [{
 										'css/owl.carousel.min.css': 'src/scss/owl.carousel.scss'
-								}, {
-										'css/owl.carousel.admin.min.css': 'src/css/owl.carousel.admin.scss'
 								}]
 						}
 				},
@@ -48,5 +46,6 @@ module.exports = function(grunt) {
 		grunt.loadNpmTasks('grunt-contrib-uglify');
 
 		grunt.registerTask('default', ['sass:dist', 'watch']);
+
 
 };

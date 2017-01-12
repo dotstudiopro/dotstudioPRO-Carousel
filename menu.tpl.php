@@ -87,21 +87,6 @@
 												</select>
 										</td>
 								</tr>
-								<!--
-									<tr>
-										<td>Autoplay Speed:</td>
-										<td><select id="opts-autoplaySpeed" class="opts-select opt-change">
-												<?php 
-												for($i = 1; $i <= 10; $i++) {
-													$s = $i != 1 ? 's':'';
-													$sel = $i == 3 ? " selected" : "";
-													echo '<option value="' . $i*1000 . '"'. $sel .'>' . $i . ' second'.$s.'</option>';
-												}
-												?>
-												</select>
-										</td>
-								</tr>
-								-->
 									<tr>
 										<td>Autoplay Direction:</td>
 										<td><select id="opts-rtl" class="opts-select opt-change">
@@ -155,14 +140,10 @@
 				  	<td><input type="text" id="title" value="" style="width:300px;"/>
 				  	</td>
 				  </tr>
-				  <tr><td colspan="2"><strong>Copy+paste generated shortcode below:</strong><br /></td></tr>
-					<tr>
-						<td colspan="2">
-							<textarea id='ds-carousel-built-shortcode' readonly style="width: 100%; height: 100px;"></textarea>
-						</td>
-					</tr>
-					
 					</tbody>
 				</table>
-	
+				<div id="ds-shortcode">
+							<label>Copy+paste generated shortcode below:</label><br />
+							<textarea id="ds-carousel-built-shortcode" readonly></textarea>
+				</div>
 </div>
