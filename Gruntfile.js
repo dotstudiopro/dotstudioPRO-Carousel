@@ -25,7 +25,9 @@ module.exports = function(grunt) {
 						dist: {
 								files: [{
 										'css/owl.carousel.min.css': 'src/scss/owl.carousel.scss'
-								}]
+								}, {
+										'css/owl.carousel.admin.min.css': 'src/scss/owl.carousel.admin.scss'
+								}, ]
 						}
 				},
 				uglify: {
