@@ -56,9 +56,12 @@ function ds_owl_category_html($args) {
 	$title = $args['title'] !== '' ? $args['title'] : $category->post_title;
 	$opts = ds_owl_create_opts($args);
 	$rndId = ds_owl_carousel_rnd_id(5);
+	$titleclass = $args['titleclass'];
 
 	$carousel =  "<div id='owl-carosel-width-$rndId' class='owl-carousel-width'></div>";
-	$carousel .= "<div class='owl-carousel-title' style='position:relative;'><h2>$title</h2><a class='owl-carousel-ellipsis' href='/channel-categories/$category_slug/' title='More...'>...</a></div>";
+	if($args['notitle'] != true) {
+		$carousel .= "<div class='owl-carousel-title' style='position:relative;'><h2 class='$titleclass'>$title</h2><a class='owl-carousel-ellipsis' href='/channel-categories/$category_slug/' title='More...'>...</a></div>";
+	}
 	$carousel .= "<div class='owl-carousel owl-theme' id='owl-carousel-$rndId' data-options='$opts'>";
 			
 	$catItems = grab_category($category_slug);
@@ -101,9 +104,12 @@ function ds_owl_channel_html($args) {
 	$objects = ds_owl_carousel_build_objects( $channels );
 	$opts = ds_owl_create_opts($args);
 	$title = $args['title'] !== '' ? $args['title'] : 'Featured Channels';
+	$titleclass = $args['titleclass'];
 
 	$carousel =  "<div id='owl-carosel-width-$rndId' class='owl-carousel-width'></div>";
-	$carousel .= "<div class='owl-carousel-title' style='position:relative;'><h2>$title</h2></div>";
+	if($args['notitle'] != true) {
+		$carousel .= "<div class='owl-carousel-title' style='position:relative;'><h2 class='$titleclass'>$title</h2></div>";
+	}
 	$carousel .= "<div class='owl-carousel owl-theme' id='owl-carousel-$rndId' data-options='$opts'>";
 
 	foreach($objects as $o){
@@ -114,7 +120,7 @@ function ds_owl_channel_html($args) {
 		$carousel .= "<div class='center-container item'>";
 		$carousel .= "	<a href='".home_url("channels/$o->slug")."' class='vert-center'>";
 		$carousel .= "		<div>";
-		$carousel .= "			<i class='fa fa-play-circle-o fa-3' aria-hidden='true'></i>";
+		$carousel .= "			<i class='ds-owl-fa fa fa-play-circle-o fa-3' aria-hidden='true'></i>";
 		$carousel .= "			<img class='' src='https://image.dotstudiopro.com/$image/1280/720' />";
 		$carousel .= "		</div>";
 		$carousel .= "		<div><strong><small class='owl-carousel-subtitle'>$o->title</small></strong></div>";
@@ -176,6 +182,28 @@ function ds_owl_grab_channel_by_id($id) {
 }
 
 
+
+function ds_owl_carousel_local_channels_list(){
+
+	global $wpdb;
+
+	$channel_parent = get_page_by_path("channels");
+
+	$channels = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."posts WHERE post_parent = ".$channel_parent->ID." ORDER BY post_name ASC");
+
+	$channels_list = "";
+
+	foreach($channels as $ch){
+
+		$channels_list .= "<input type='checkbox' name='channel' value='$ch->post_name'> $ch->post_title<br/>";
+
+	}
+
+	return $channels_list;
+
+}
+
+
 function ds_owl_carousel_display_shortcode( $atts ) {
 
 
@@ -195,6 +223,8 @@ function ds_owl_carousel_display_shortcode( $atts ) {
 		'dots' => false,
 		'rtl' => false,
 		'nav' => false,
+		'notitle' => false, 
+		'titleclass' => ''
 
 	), $atts, 'ds_owl_carousel' );
 

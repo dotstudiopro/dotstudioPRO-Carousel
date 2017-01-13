@@ -36,7 +36,7 @@
 						<td>
 
 							<div  id="channels-carousel-list" class="carousel-list">
-							<?php echo ds_carousel_local_channels_list(); ?>
+							<?php echo ds_owl_carousel_local_channels_list(); ?>
 							</div>
 							<div id="category-carousel-list" class="carousel-list" style="display:none;">
 									<?php 
@@ -125,6 +125,10 @@
 										<td><input type="checkbox" id="opts-nav" class="opt-change"></td>
 								</tr>
 								<tr>
+										<td>No Title:</td>
+										<td><input type="checkbox" id="opts-notitle" class="opt-change"></td>
+								</tr>
+								<tr>
 									  <td>Animation In:</td>
 									  <td><?php echo ds_owl_admin_animation_select('opts-animate-in','animate-type opt-change'); ?></td>
 								</tr>
@@ -135,13 +139,27 @@
 								</table>
 						</td>
 					</tr>
-				  <tr>
-				  	<td><strong>Carousel Title:</strong><br />(leave blank for default)</td>
-				  	<td><input type="text" id="title" value="" style="width:300px;"/>
-				  	</td>
-				  </tr>
-					</tbody>
-				</table>
+					<tr>
+							<td colspan="3">
+								<table class="titleinfo">
+								<tbody>
+							  <tr>
+							  	<td style="width:200px;">&nbsp;</td>
+							  	<td><strong>Carousel Title:</strong><br />(leave blank for default)</td>
+							  	<td><input type="text" id="title" value="" class="textinput" style="width:300px;"/>
+							  	</td>
+							  </tr>
+							  <tr>
+							  	<td></td>
+							  	<td><strong>Title CSS Class:</strong><br />(leave blank for none)</td>
+							  	<td><input type="text" id="titleclass" class="textinput" value="" style="width:300px;"/>
+							  	</td>
+							  </tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+					</table>
 				<div id="ds-shortcode">
 							<label>Copy+paste generated shortcode below:</label><br />
 							<textarea id="ds-carousel-built-shortcode" readonly></textarea>
