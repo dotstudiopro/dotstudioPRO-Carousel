@@ -74,6 +74,19 @@
 												</select>
 										</td>
 									</tr>
+								<tr>
+										<td>Transition Speed:</td>
+										<td><select id="opts-autoplaySpeed" class="opts-select opt-change">
+												<?php 
+												for($i = 1; $i <= 5; $i++) {
+													$s = $i != 1 ? 's':'';
+													$sel = $i == 1 ? " selected" : "";
+													echo '<option value="' . $i*1000 .'"'. $sel .'>' . $i . ' second'.$s.'</option>';
+												}
+												?>
+												</select>
+										</td>
+									</tr>
 									<tr>
 										<td>Slides to Show:</td>
 										<td><select id="opts-items" class="opts-select opt-change">

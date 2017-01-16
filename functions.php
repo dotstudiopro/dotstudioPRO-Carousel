@@ -215,6 +215,7 @@ function ds_owl_carousel_display_shortcode( $atts ) {
 		'autoplay' => true,
 		'dots' => false,
 		'autoplay_timeout' => 3000,
+		'autoplay_speed' => 1000,
 		'autoplay_hover_pause' => false,
 		'items' => 3,
 		'slide_by' => 1,
